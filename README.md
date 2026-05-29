@@ -1,0 +1,36 @@
+# JOHN ONLINE SERVICES
+
+A premium Tanzanian digital agency platform for HESLB, university applications, RITA services, and urgent government support.
+
+## Features
+
+- Dynamic service bundles with real-time pricing
+- Dark / Light mode toggle
+- Local mobile money payment layout
+- WhatsApp redirect with preformatted order details
+- Admin dashboard with protected access
+- Auto-cleanup of uploaded files on completion
+
+## Setup
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Initialize the SQLite database:
+   ```bash
+   npm run prepare
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Admin Access
+
+- Email: `johncharlessarwi@gmail.com`
+- Password: `MrSoftware2026!`
+
+## Notes
+
+This app stores orders in `database/orders.db` and saves uploaded screenshots into `uploads/`.
