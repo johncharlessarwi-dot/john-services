@@ -33,3 +33,11 @@ Configure administrator credentials through the application's secure environment
 ## Notes
 
 This app stores orders in `database/orders.db` and saves uploaded screenshots into `uploads/`.
+
+## Project maintainer
+
+JOHN ONLINE SERVICES AND APPLICATIONS — Tanzania-based digital services and software solutions.
+
+- **Developer:** [John Charles Sarwi](https://john-charles-sarwi-portfolio.vercel.app/)
+- **Portfolio:** https://john-charles-sarwi-portfolio.vercel.app/
+- **GitHub:** https://github.com/johncharlessarwi-dot
