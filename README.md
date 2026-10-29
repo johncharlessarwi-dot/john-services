@@ -28,8 +28,7 @@ A premium Tanzanian digital agency platform for HESLB, university applications, 
 
 ## Admin Access
 
-- Email: `johncharlessarwi@gmail.com`
-- Password: `MrSoftware2026!`
+Configure administrator credentials through the application's secure environment or deployment settings. Do not commit passwords, API keys, session secrets, or other credentials to this repository. If a credential has ever been exposed in a public commit, rotate it in the application and remove it from any active configuration.
 
 ## Notes
 
