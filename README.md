@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/readme/animated-banner.svg" width="100%" alt="Animated john-services project banner" />
+</div>
+
 # JOHN ONLINE SERVICES
 
 A premium Tanzanian digital agency platform for HESLB, university applications, RITA services, and urgent government support.
