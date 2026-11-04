@@ -9,7 +9,7 @@ test('outputs CSV rows with escaped quotes', () => {
 test('prefixes spreadsheet formula-shaped values', () => {
   const csv = exportOrderSummaryCsv([{ reference: '=HYPERLINK("x")', customerName: '+cmd', status: '@malicious', totalTzs: 0 }]);
   assert.match(csv, /"'=HYPERLINK/);
-  assert.match(csv, /"'+cmd"/);
+  assert.ok(csv.includes(`"'+cmd"`));
   assert.match(csv, /"'@malicious"/);
 });
 test('rejects invalid totals and non-arrays', () => {
