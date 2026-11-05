@@ -17,3 +17,14 @@ test('rejects malformed phone, excessive notes and arrays', () => {
   assert.equal(validateOrderDraft({ customerName: 'John', phone: 'abc', services: ['valid'] }).ok, false);
   assert.equal(validateOrderDraft({ customerName: 'John', phone: '255698170989', services: ['valid'], notes: 'x'.repeat(1001) }).ok, false);
 });
+
+test('rejects case-insensitive duplicate service IDs', () => {
+  const result = validateOrderDraft({ customerName: 'John', phone: '255698170989', services: ['HESLB', 'heslb'] });
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.includes('Duplicate service identifiers'));
+});
+
+test('accepts distinct mixed-case service identifiers', () => {
+  const result = validateOrderDraft({ customerName: 'John', phone: '255698170989', services: ['HESLB', 'rita'] });
+  assert.equal(result.ok, true);
+});
