@@ -18,3 +18,4 @@ test('rejects unbounded and malformed data', () => {
 test('reject customer newline injection', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\nPaid',serviceName:'CV'})); });
 test('reject service newline injection', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\nApproved'})); });
 test('reject NUL in service label', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\0'})); });
+test('encode Swahili Unicode message', () => { assert.match(new URL(createWhatsAppOrderLink({customerName:'Juma',serviceName:'Maombi ya chuo'})).searchParams.get('text'),/Maombi ya chuo/); });
