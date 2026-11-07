@@ -17,3 +17,4 @@ test('rejects duplicate services and oversized quotes', () => {
   assert.throws(() => calculateServiceQuote([{ serviceId: 'a', unitPriceTzs: 1, quantity: 1 }, { serviceId: 'a', unitPriceTzs: 2, quantity: 1 }]));
   assert.throws(() => calculateServiceQuote([{ serviceId: 'a', unitPriceTzs: 100000000, quantity: 2 }]));
 });
+test('reject mixed-case duplicate service quotes', () => { assert.throws(() => calculateServiceQuote([{serviceId:'HESLB',unitPriceTzs:10,quantity:1},{serviceId:'heslb',unitPriceTzs:20,quantity:1}])); });
