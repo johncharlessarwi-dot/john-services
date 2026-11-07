@@ -16,3 +16,4 @@ test('rejects invalid totals and non-arrays', () => {
   assert.throws(() => exportOrderSummaryCsv({}));
   assert.throws(() => exportOrderSummaryCsv([{ totalTzs: -1 }]));
 });
+test('neutralize zero-width-prefixed formulas', () => { assert.ok(exportOrderSummaryCsv([{reference:'\u200b=1+1',customerName:'John',status:'pending',totalTzs:1}]).includes('"\'\u200b=1+1"')); });
