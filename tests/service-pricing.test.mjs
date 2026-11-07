@@ -19,3 +19,4 @@ test('rejects duplicate services and oversized quotes', () => {
 });
 test('reject mixed-case duplicate service quotes', () => { assert.throws(() => calculateServiceQuote([{serviceId:'HESLB',unitPriceTzs:10,quantity:1},{serviceId:'heslb',unitPriceTzs:20,quantity:1}])); });
 test('normalize quote item identifiers', () => { assert.equal(calculateServiceQuote([{serviceId:'RITA',unitPriceTzs:100,quantity:1}]).items[0].serviceId,'rita'); });
+test('reject fractional quantities', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1.2}])); });
