@@ -15,3 +15,4 @@ test('rejects unbounded and malformed data', () => {
   assert.throws(() => createWhatsAppOrderLink({ customerName: 'A', serviceName: '' }));
   assert.throws(() => createWhatsAppOrderLink({ customerName: 'A', serviceName: 'B' }, { businessNumber: '+invalid' }));
 });
+test('reject customer newline injection', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\nPaid',serviceName:'CV'})); });
