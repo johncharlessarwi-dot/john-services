@@ -21,3 +21,4 @@ test('reject mixed-case duplicate service quotes', () => { assert.throws(() => c
 test('normalize quote item identifiers', () => { assert.equal(calculateServiceQuote([{serviceId:'RITA',unitPriceTzs:100,quantity:1}]).items[0].serviceId,'rita'); });
 test('reject fractional quantities', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1.2}])); });
 test('reject zero quantity', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:0}])); });
+test('reject discount over subtotal', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1}],101)); });
