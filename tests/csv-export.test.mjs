@@ -20,3 +20,4 @@ test('neutralize zero-width-prefixed formulas', () => { assert.ok(exportOrderSum
 test('neutralize BOM-prefixed formulas', () => { assert.ok(exportOrderSummaryCsv([{reference:'\ufeff=1+1',customerName:'John',status:'pending',totalTzs:1}]).includes('"\'\ufeff=1+1"')); });
 test('reject array order records', () => { assert.throws(() => exportOrderSummaryCsv([[]]),TypeError); });
 test('reject oversized spreadsheet values', () => { assert.throws(() => exportOrderSummaryCsv([{reference:'a'.repeat(10001),customerName:'John',status:'pending',totalTzs:10}]),RangeError); });
+test('reject missing order reference', () => { assert.throws(() => exportOrderSummaryCsv([{customerName:'John',status:'pending',totalTzs:10}]),TypeError); });
