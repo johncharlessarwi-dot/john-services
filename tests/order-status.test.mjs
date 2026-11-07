@@ -14,3 +14,4 @@ test('requires cancellation explanation', () => {
   assert.equal(transitionOrderStatus('reviewing', 'cancelled', 'Customer request').reason, 'Customer request');
 });
 test('reject NUL in cancellation reason', () => { assert.throws(() => transitionOrderStatus('pending','cancelled','Customer\0cancelled')); });
+test('terminal state remains closed', () => { assert.deepEqual(allowedOrderTransitions('cancelled'),[]); });
