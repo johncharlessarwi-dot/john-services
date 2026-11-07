@@ -18,3 +18,4 @@ test('rejects invalid totals and non-arrays', () => {
 });
 test('neutralize zero-width-prefixed formulas', () => { assert.ok(exportOrderSummaryCsv([{reference:'\u200b=1+1',customerName:'John',status:'pending',totalTzs:1}]).includes('"\'\u200b=1+1"')); });
 test('neutralize BOM-prefixed formulas', () => { assert.ok(exportOrderSummaryCsv([{reference:'\ufeff=1+1',customerName:'John',status:'pending',totalTzs:1}]).includes('"\'\ufeff=1+1"')); });
+test('reject array order records', () => { assert.throws(() => exportOrderSummaryCsv([[]]),TypeError); });
