@@ -28,3 +28,4 @@ test('accepts distinct mixed-case service identifiers', () => {
   const result = validateOrderDraft({ customerName: 'John', phone: '255698170989', services: ['HESLB', 'rita'] });
   assert.equal(result.ok, true);
 });
+test('reject NUL in customer name', () => { assert.equal(validateOrderDraft({customerName:'Jo\0hn',phone:'255698170989',services:['web']}).ok,false); });
