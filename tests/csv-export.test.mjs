@@ -21,3 +21,4 @@ test('neutralize BOM-prefixed formulas', () => { assert.ok(exportOrderSummaryCsv
 test('reject array order records', () => { assert.throws(() => exportOrderSummaryCsv([[]]),TypeError); });
 test('reject oversized spreadsheet values', () => { assert.throws(() => exportOrderSummaryCsv([{reference:'a'.repeat(10001),customerName:'John',status:'pending',totalTzs:10}]),RangeError); });
 test('reject missing order reference', () => { assert.throws(() => exportOrderSummaryCsv([{customerName:'John',status:'pending',totalTzs:10}]),TypeError); });
+test('reject exotic order prototype', () => { assert.throws(() => exportOrderSummaryCsv([Object.assign(new Date(),{reference:'A',customerName:'John',status:'pending',totalTzs:1})]),TypeError); });
