@@ -14,3 +14,4 @@ test('rejects invalid date or random source', () => {
   assert.throws(() => createOrderReference('bad'));
   assert.throws(() => createOrderReference('2026-11-04', () => Buffer.alloc(2)));
 });
+test('reject array date input', () => { assert.throws(() => createOrderReference([]),TypeError); });
