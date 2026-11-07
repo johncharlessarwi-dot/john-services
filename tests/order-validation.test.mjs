@@ -32,3 +32,4 @@ test('reject NUL in customer name', () => { assert.equal(validateOrderDraft({cus
 test('reject newline in customer name', () => { assert.equal(validateOrderDraft({customerName:'John\nAdmin',phone:'255698170989',services:['web']}).ok,false); });
 test('lowercase service IDs', () => { assert.deepEqual(validateOrderDraft({customerName:'John',phone:'255698170989',services:['HESLB']}).value.services,['heslb']); });
 test('reject phone with newline', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698\n170989',services:['web']}).ok,false); });
+test('reject too many services', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:Array.from({length:21},(_,i)=>`svc${i}`)}).ok,false); });
