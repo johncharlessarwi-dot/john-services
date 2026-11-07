@@ -22,3 +22,4 @@ test('normalize quote item identifiers', () => { assert.equal(calculateServiceQu
 test('reject fractional quantities', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1.2}])); });
 test('reject zero quantity', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:0}])); });
 test('reject discount over subtotal', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1}],101)); });
+test('reject array quote item', () => { assert.throws(() => calculateServiceQuote([Object.assign([],{serviceId:'web',unitPriceTzs:100,quantity:1})]),RangeError); });
