@@ -13,3 +13,5 @@ test('rejects foreign, malformed, fixed-line and unsafe input', () => {
   assert.throws(() => normalizeTanzaniaMobile(null));
 });
 test('reject very long telephone string', () => { assert.throws(() => normalizeTanzaniaMobile(' '.repeat(100)+'0698170989'),RangeError); });
+
+test('reject nonbreaking space in recipient number', () => { assert.throws(() => normalizeTanzaniaMobile('+255\u00a0698170989'),RangeError); });

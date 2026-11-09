@@ -35,3 +35,17 @@ test('reject phone with newline', () => { assert.equal(validateOrderDraft({custo
 test('reject too many services', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:Array.from({length:21},(_,i)=>`svc${i}`)}).ok,false); });
 test('reject overlong customer identity', () => { assert.equal(validateOrderDraft({customerName:'J'.repeat(121),phone:'255698170989',services:['web']}).ok,false); });
 test('reject Date masquerading as an order', () => { assert.equal(validateOrderDraft(Object.assign(new Date(),{customerName:'John',phone:'255698170989',services:['web']})).ok,false); });
+
+test('reject customer notes with NUL control', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'test\x00hidden'}).ok,false); });
+
+test('reject bidi override in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u202eAdmin',phone:'255698170989',services:['web']}).ok,false); });
+
+test('reject bidi override in order notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'paid\u202eon hold'}).ok,false); });
+
+test('reject invisible right-to-left mark in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u200f',phone:'255698170989',services:['web']}).ok,false); });
+
+test('reject invisible left-to-right mark in notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'done\u200e'}).ok,false); });
+
+test('validated service identifiers are immutable', () => { const result=validateOrderDraft({customerName:'John',phone:'255698170989',services:['web']}); assert.equal(Object.isFrozen(result.value.services),true); });
+
+test('validated customer order is immutable', () => { const result=validateOrderDraft({customerName:'John',phone:'255698170989',services:['web']}); assert.equal(Object.isFrozen(result.value),true); });

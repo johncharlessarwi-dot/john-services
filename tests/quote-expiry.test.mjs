@@ -13,3 +13,13 @@ test('rejects invalid dates and excessive validity', () => {
   assert.throws(() => isQuoteExpired('not-a-date'));
 });
 test('reject expiring outside date limits', () => { assert.throws(() => createQuoteValidity(8.64e15,60),RangeError); });
+
+test('reject boolean issue timestamp coercion', () => { assert.throws(() => createQuoteValidity(true),TypeError); });
+
+test('reject array issue timestamp coercion', () => { assert.throws(() => createQuoteValidity([2026,11,9]),TypeError); });
+
+test('reject boolean expiry timestamp', () => { assert.throws(() => isQuoteExpired(false),TypeError); });
+
+test('reject array current timestamp', () => { assert.throws(() => isQuoteExpired('2026-11-09',[2026,11,9]),TypeError); });
+
+test('quote expiration at exact boundary is expired', () => { const q=createQuoteValidity('2026-11-09T10:00:00Z',1); assert.equal(isQuoteExpired(q.expiresAt,q.expiresAt),true); });

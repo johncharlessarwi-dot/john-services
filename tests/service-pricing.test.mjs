@@ -23,3 +23,9 @@ test('reject fractional quantities', () => { assert.throws(() => calculateServic
 test('reject zero quantity', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:0}])); });
 test('reject discount over subtotal', () => { assert.throws(() => calculateServiceQuote([{serviceId:'rita',unitPriceTzs:100,quantity:1}],101)); });
 test('reject array quote item', () => { assert.throws(() => calculateServiceQuote([Object.assign([],{serviceId:'web',unitPriceTzs:100,quantity:1})]),RangeError); });
+
+test('reject Date-backed quote item prototype', () => { assert.throws(() => calculateServiceQuote([Object.assign(new Date(),{serviceId:'web',unitPriceTzs:10,quantity:1})]),RangeError); });
+
+test('quote line items are immutable after pricing', () => { const quote=calculateServiceQuote([{serviceId:'web',unitPriceTzs:100,quantity:1}]); assert.equal(Object.isFrozen(quote.items[0]),true); });
+
+test('quote totals and item collection are immutable', () => { const quote=calculateServiceQuote([{serviceId:'web',unitPriceTzs:100,quantity:1}]); assert.equal(Object.isFrozen(quote),true); assert.equal(Object.isFrozen(quote.items),true); });

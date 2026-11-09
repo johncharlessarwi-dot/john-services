@@ -20,3 +20,13 @@ test('reject service newline injection', () => { assert.throws(() => createWhats
 test('reject NUL in service label', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\0'})); });
 test('encode Swahili Unicode message', () => { assert.match(new URL(createWhatsAppOrderLink({customerName:'Juma',serviceName:'Maombi ya chuo'})).searchParams.get('text'),/Maombi ya chuo/); });
 test('reject nonstring business number', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:255698170989}),TypeError); });
+
+test('reject all-zero WhatsApp merchant destination', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:'000000000'}),TypeError); });
+
+test('reject bidi override in WhatsApp customer name', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\u202eAdmin',serviceName:'CV'})); });
+
+test('reject bidi override in WhatsApp service name', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\u2066Paid'})); });
+
+test('reject hidden RTL mark in WhatsApp customer', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\u200f',serviceName:'CV'})); });
+
+test('reject hidden LTR mark in WhatsApp service', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\u200e'})); });
