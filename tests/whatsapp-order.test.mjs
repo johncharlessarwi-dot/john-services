@@ -22,3 +22,5 @@ test('encode Swahili Unicode message', () => { assert.match(new URL(createWhatsA
 test('reject nonstring business number', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:255698170989}),TypeError); });
 
 test('reject all-zero WhatsApp merchant destination', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:'000000000'}),TypeError); });
+
+test('reject bidi override in WhatsApp customer name', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\u202eAdmin',serviceName:'CV'})); });
