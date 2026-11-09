@@ -35,3 +35,5 @@ test('reject phone with newline', () => { assert.equal(validateOrderDraft({custo
 test('reject too many services', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:Array.from({length:21},(_,i)=>`svc${i}`)}).ok,false); });
 test('reject overlong customer identity', () => { assert.equal(validateOrderDraft({customerName:'J'.repeat(121),phone:'255698170989',services:['web']}).ok,false); });
 test('reject Date masquerading as an order', () => { assert.equal(validateOrderDraft(Object.assign(new Date(),{customerName:'John',phone:'255698170989',services:['web']})).ok,false); });
+
+test('reject customer notes with NUL control', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'test\x00hidden'}).ok,false); });
