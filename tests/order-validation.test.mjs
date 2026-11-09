@@ -47,3 +47,5 @@ test('reject invisible right-to-left mark in customer identity', () => { assert.
 test('reject invisible left-to-right mark in notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'done\u200e'}).ok,false); });
 
 test('validated service identifiers are immutable', () => { const result=validateOrderDraft({customerName:'John',phone:'255698170989',services:['web']}); assert.equal(Object.isFrozen(result.value.services),true); });
+
+test('validated customer order is immutable', () => { const result=validateOrderDraft({customerName:'John',phone:'255698170989',services:['web']}); assert.equal(Object.isFrozen(result.value),true); });
