@@ -39,3 +39,5 @@ test('reject Date masquerading as an order', () => { assert.equal(validateOrderD
 test('reject customer notes with NUL control', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'test\x00hidden'}).ok,false); });
 
 test('reject bidi override in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u202eAdmin',phone:'255698170989',services:['web']}).ok,false); });
+
+test('reject bidi override in order notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'paid\u202eon hold'}).ok,false); });
