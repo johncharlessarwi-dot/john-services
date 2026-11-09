@@ -45,3 +45,5 @@ test('reject bidi override in order notes', () => { assert.equal(validateOrderDr
 test('reject invisible right-to-left mark in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u200f',phone:'255698170989',services:['web']}).ok,false); });
 
 test('reject invisible left-to-right mark in notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'done\u200e'}).ok,false); });
+
+test('validated service identifiers are immutable', () => { const result=validateOrderDraft({customerName:'John',phone:'255698170989',services:['web']}); assert.equal(Object.isFrozen(result.value.services),true); });
