@@ -26,3 +26,5 @@ test('reject all-zero WhatsApp merchant destination', () => { assert.throws(() =
 test('reject bidi override in WhatsApp customer name', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\u202eAdmin',serviceName:'CV'})); });
 
 test('reject bidi override in WhatsApp service name', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\u2066Paid'})); });
+
+test('reject hidden RTL mark in WhatsApp customer', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John\u200f',serviceName:'CV'})); });
