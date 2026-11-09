@@ -27,3 +27,5 @@ test('reject array quote item', () => { assert.throws(() => calculateServiceQuot
 test('reject Date-backed quote item prototype', () => { assert.throws(() => calculateServiceQuote([Object.assign(new Date(),{serviceId:'web',unitPriceTzs:10,quantity:1})]),RangeError); });
 
 test('quote line items are immutable after pricing', () => { const quote=calculateServiceQuote([{serviceId:'web',unitPriceTzs:100,quantity:1}]); assert.equal(Object.isFrozen(quote.items[0]),true); });
+
+test('quote totals and item collection are immutable', () => { const quote=calculateServiceQuote([{serviceId:'web',unitPriceTzs:100,quantity:1}]); assert.equal(Object.isFrozen(quote),true); assert.equal(Object.isFrozen(quote.items),true); });
