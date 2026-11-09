@@ -20,3 +20,5 @@ test('reject service newline injection', () => { assert.throws(() => createWhats
 test('reject NUL in service label', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV\0'})); });
 test('encode Swahili Unicode message', () => { assert.match(new URL(createWhatsAppOrderLink({customerName:'Juma',serviceName:'Maombi ya chuo'})).searchParams.get('text'),/Maombi ya chuo/); });
 test('reject nonstring business number', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:255698170989}),TypeError); });
+
+test('reject all-zero WhatsApp merchant destination', () => { assert.throws(() => createWhatsAppOrderLink({customerName:'John',serviceName:'CV'},{businessNumber:'000000000'}),TypeError); });
