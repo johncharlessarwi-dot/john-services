@@ -26,3 +26,5 @@ test('reject exotic order prototype', () => { assert.throws(() => exportOrderSum
 test('neutralize bidi-prefixed CSV formulas', () => { const csv=exportOrderSummaryCsv([{reference:'\u202e=1+1',customerName:'John',status:'pending',totalTzs:1}]); assert.ok(csv.includes('"\'\u202e=1+1"')); });
 
 test('reject excessively high spreadsheet total', () => { assert.throws(() => exportOrderSummaryCsv([{reference:'A',customerName:'John',status:'pending',totalTzs:100_000_001}]),RangeError); });
+
+test('reject oversized aggregate spreadsheet export', () => { const records=Array.from({length:600},(_,i)=>({reference:`A-${i}`,customerName:'x'.repeat(10000),status:'pending',totalTzs:1})); assert.throws(() => exportOrderSummaryCsv(records),RangeError); });
