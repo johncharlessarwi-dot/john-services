@@ -41,3 +41,5 @@ test('reject customer notes with NUL control', () => { assert.equal(validateOrde
 test('reject bidi override in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u202eAdmin',phone:'255698170989',services:['web']}).ok,false); });
 
 test('reject bidi override in order notes', () => { assert.equal(validateOrderDraft({customerName:'John',phone:'255698170989',services:['web'],notes:'paid\u202eon hold'}).ok,false); });
+
+test('reject invisible right-to-left mark in customer identity', () => { assert.equal(validateOrderDraft({customerName:'John\u200f',phone:'255698170989',services:['web']}).ok,false); });
