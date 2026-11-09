@@ -21,3 +21,5 @@ test('reject array issue timestamp coercion', () => { assert.throws(() => create
 test('reject boolean expiry timestamp', () => { assert.throws(() => isQuoteExpired(false),TypeError); });
 
 test('reject array current timestamp', () => { assert.throws(() => isQuoteExpired('2026-11-09',[2026,11,9]),TypeError); });
+
+test('quote expiration at exact boundary is expired', () => { const q=createQuoteValidity('2026-11-09T10:00:00Z',1); assert.equal(isQuoteExpired(q.expiresAt,q.expiresAt),true); });
