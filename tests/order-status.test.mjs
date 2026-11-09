@@ -18,3 +18,5 @@ test('terminal state remains closed', () => { assert.deepEqual(allowedOrderTrans
 test('reject object current state', () => { assert.throws(() => transitionOrderStatus({},'completed'),TypeError); });
 
 test('reject bidi override in cancellation reason', () => { assert.throws(() => transitionOrderStatus('pending','cancelled','Customer\u202ecancelled')); });
+
+test('reject invisible direction mark in cancellation audit', () => { assert.throws(() => transitionOrderStatus('pending','cancelled','Customer\u200frequest')); });
