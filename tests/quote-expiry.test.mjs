@@ -19,3 +19,5 @@ test('reject boolean issue timestamp coercion', () => { assert.throws(() => crea
 test('reject array issue timestamp coercion', () => { assert.throws(() => createQuoteValidity([2026,11,9]),TypeError); });
 
 test('reject boolean expiry timestamp', () => { assert.throws(() => isQuoteExpired(false),TypeError); });
+
+test('reject array current timestamp', () => { assert.throws(() => isQuoteExpired('2026-11-09',[2026,11,9]),TypeError); });
