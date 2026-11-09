@@ -24,3 +24,5 @@ test('reject missing order reference', () => { assert.throws(() => exportOrderSu
 test('reject exotic order prototype', () => { assert.throws(() => exportOrderSummaryCsv([Object.assign(new Date(),{reference:'A',customerName:'John',status:'pending',totalTzs:1})]),TypeError); });
 
 test('neutralize bidi-prefixed CSV formulas', () => { const csv=exportOrderSummaryCsv([{reference:'\u202e=1+1',customerName:'John',status:'pending',totalTzs:1}]); assert.ok(csv.includes('"\'\u202e=1+1"')); });
+
+test('reject excessively high spreadsheet total', () => { assert.throws(() => exportOrderSummaryCsv([{reference:'A',customerName:'John',status:'pending',totalTzs:100_000_001}]),RangeError); });
