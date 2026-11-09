@@ -15,3 +15,5 @@ test('rejects invalid dates and excessive validity', () => {
 test('reject expiring outside date limits', () => { assert.throws(() => createQuoteValidity(8.64e15,60),RangeError); });
 
 test('reject boolean issue timestamp coercion', () => { assert.throws(() => createQuoteValidity(true),TypeError); });
+
+test('reject array issue timestamp coercion', () => { assert.throws(() => createQuoteValidity([2026,11,9]),TypeError); });
