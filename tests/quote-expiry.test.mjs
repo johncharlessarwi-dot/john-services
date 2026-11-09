@@ -13,3 +13,5 @@ test('rejects invalid dates and excessive validity', () => {
   assert.throws(() => isQuoteExpired('not-a-date'));
 });
 test('reject expiring outside date limits', () => { assert.throws(() => createQuoteValidity(8.64e15,60),RangeError); });
+
+test('reject boolean issue timestamp coercion', () => { assert.throws(() => createQuoteValidity(true),TypeError); });
